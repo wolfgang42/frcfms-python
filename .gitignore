@@ -1,0 +1,5 @@
+*.pyc
+tweets.sqlite
+since_id.txt
+credentials.py
+
