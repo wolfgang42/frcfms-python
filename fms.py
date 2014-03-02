@@ -9,8 +9,13 @@ class _Database:
 		self._db=sqlite3.connect('tweets.sqlite')
 	def insert(self, tweet_id, created_at, text):
 		# TODO also parse the tweets?
-		self._db.execute("INSERT INTO raw_tweets VALUES (?, ?, ?);", 
-				(str(tweet_id), created_at.isoformat(), text))
+		try:
+			self._db.execute("INSERT INTO raw_tweets VALUES (?, ?, ?);", 
+					(str(tweet_id), created_at.isoformat(), text))
+		except sqlite3.IntegrityError: # Tweet already inserted
+			# TODO should we handle this another way?
+			# (Perhaps check if the data is the same)
+			pass
 	
 	def commit(self):
 		self._db.commit()
