@@ -17,7 +17,6 @@ if sys.argv[1] == 'required' or wasUpdated:
 		results = fms.api.user_timeline(screen_name=fms.SCREEN_NAME, since_id=since_id, trim_user=True, count=200)
 		for result in results:
 			updated = True
-			print result.id
 			fms.db.insert(result.id, result.created_at, result.text)
 			if result.id > since_id:
 				since_id = result.id
